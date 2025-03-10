@@ -1,34 +1,30 @@
 ````
-use KN03; 
+use KN03;
 
 
-print("Alle Users:");
-db.users.find().pretty();
+print("Alle Benutzer:");
+db.benutzer.find().forEach(user => printjson(user));
 
+print("Os nach dem 01. Jan. 2024 aktualisiert:");
+db.windows_betriebssystem.find({ Last_Update: { $gt: ISODate("2024-01-01T00:00:00Z") } }).forEach(os => printjson(os));
 
-print("Bestellungen nach dem 01.jan.2024:");
-db.orders.find({ date: { $gt: ISODate("2024-01-01T00:00:00Z") } }).pretty();
+print("PC-Komponenten mit Kategorie 'Elektronik' oder Preis über 1000:");
+db.pc_komponenten.find({ 
+    $or: [{ Kategorie: "Elektronik" }, { Preis: { $gt: 1000 } }] 
+}).forEach(pc => printjson(pc));
 
-//oder
-print("Produkte mit Kategorie 'Electronics' ODER Preis über 1000:");
-db.products.find({ 
-    $or: [{ category: "Electronics" }, { price: { $gt: 1000 } }] 
-}).pretty();
+print("Benutzer mit Alter über 25 und ner Gmail-Adresse:");
+db.benutzer.find({ 
+    age: { $gt: 25 }, 
+    email: /@gmail\.com$/
+}).forEach(user => printjson(user));
 
-//und
-print("Users mit Alter über 25 UND Gmail-Adresse:");
-db.users.find({ 
-    $and: [{ age: { $gt: 25 } }, { email: /gmail/ }] 
-}).pretty();
+print("Programme, die mit 'Vis' beginnen:");
+db.programme.find({ Name: /^Vis/ }).forEach(program => printjson(program));
 
-//regex
-print("Bestellungen mit Produktname, der mit 'Lap' beginnt:");
-db.orders.find({ product: /^Lap/ }).pretty();
+print("Benutzer mit Projektion (Name & _id):");
+db.benutzer.find({}, { BenutzerName: 1, _id: 1 }).forEach(user => printjson(user));
 
-//projektion mit _id
-print("Users mit Projektion (Name & _id):");
-db.users.find({}, { name: 1, _id: 1 }).pretty();
+print("Programme mit Projektion (Name & Version, ohne _id):");
+db.programme.find({}, { Name: 1, Version: 1, _id: 0 }).forEach(program => printjson(program));
 
-//projektion ohne _id
-print("Produkte mit Projektion (Name & Preis, ohne _id):");
-db.products.find({}, { name: 1, price: 1, _id: 0 }).pretty();

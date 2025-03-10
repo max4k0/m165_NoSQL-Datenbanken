@@ -1,98 +1,125 @@
 ````
-
 use KN03;
 
-//löschen
-db.Benutzer.drop();
-db.Produkte.drop();
-db.Bestellungen.drop();
-
-
-//neu einfügen
 
 
 let benutzerId = ObjectId();
 
-db.Benutzer.insertOne({
+db.benutzer.insertOne({
     _id: benutzerId,
-    name: "Max",
-    email: "max@gmail.com",
-    alter: 18
+    BenutzerName: "Max",
+    Passwort: "securepass123",
+    Rolle: "Admin",
+    Letzter_Login: new Date(),
+    email: "max@gmail.com"
 });
+print("Benutzer eingefügt.");
 
 
+let pcKomponenteId = "Dell XPS 15";
 
-let produktIds = [ObjectId(), ObjectId(), ObjectId()];
+db.pc_komponenten.insertOne({
+    _id: pcKomponenteId,
+    CPU: "Intel Core i7-12700H",
+    RAM: 16,
+    Datenträger: "1TB SSD",
+    Grafikkarte: "NVIDIA RTX 3060",
+    Netzwerkkarte: "Intel AX201",
+    Mainboard: "Dell Custom Board",
+    Netzteil: "90W Adapter",
+    Gehäuse: "Aluminium",
+    Gekauft_am: ISODate("2023-05-12T00:00:00Z"),
+    Win_Version: ["Windows 10", "Windows 11"]
+});
+print("PC-Komponenten eingefügt.");
 
-db.Produkte.insertMany([
+
+let computerName = "DELL-XPS-15";
+
+db.windows_betriebssystem.insertOne({
+    _id: computerName,
+    ComputerName: computerName,
+    Build_Version: "22H2",
+    Art: "Pro",
+    Architektur: "64-bit",
+    Last_Update: new Date(),
+    Benutzer: [benutzerId] // Verknüpfung mit Benutzer
+});
+print("Windows Betriebssystem eingefügt.");
+
+
+let programIds = [ObjectId(), ObjectId()];
+
+db.programme.insertMany([
     {
-        _id: produktIds[0],
-        name: "Laptop",
-        preis: 1250,
-        kategorie: "Elektronik"
+        _id: programIds[0],
+        Name: "Visual Studio Code",
+        Hersteller: "Microsoft",
+        Version: "1.75.0",
+        Kompatibilität: "Windows 10/11",
+        Beschreibung: "Code Editor für Entwickler",
+        Rechte: "Admin",
+        Installiert_am: ISODate("2024-02-15T00:00:00Z"),
+        BenutzerID: [benutzerId]
     },
     {
-        _id: produktIds[1],
-        name: "Smartphone",
-        preis: 800,
-        kategorie: "Elektronik"
-    },
-    {
-        _id: produktIds[2],
-        name: "Kopfhörer",
-        preis: 150,
-        kategorie: "Audio"
+        _id: programIds[1],
+        Name: "Google Chrome",
+        Hersteller: "Google",
+        Version: "120.0",
+        Kompatibilität: "Windows 10/11",
+        Beschreibung: "Webbrowser",
+        Rechte: "User",
+        Installiert_am: ISODate("2024-01-10T00:00:00Z"),
+        BenutzerID: [benutzerId]
     }
 ]);
-print("Mehrere Produkte erneut eingefügt.");
+print("Programme eingefügt.");
 
+//Updates
 
-
-let bestellungIds = [ObjectId(), ObjectId()];
-
-db.Bestellungen.insertMany([
-    {
-        _id: bestellungIds[0],
-        benutzerId: benutzerId,
-        produktId: produktIds[0],
-        menge: 1,
-        status: "Versendet"
-    },
-    {
-        _id: bestellungIds[1],
-        benutzerId: benutzerId,
-        produktId: produktIds[2],
-        menge: 2,
-        status: "In bearbeitung"
-    }
-]);
-print("mehrere Dokumente erneut eingefügt.");
-
-
-
-//benutzer neu laden
-db.Benutzer.updateOne(
+db.benutzer.updateOne(
     { _id: benutzerId },
-    { $set: { email: "max@gmail.com" } }
+    { $set: { email: "max.new@gmail.com" } }
 );
-print("Benutzer aktualisiert mit updateOne");
+print("Benutzer aktualisiert.");
 
-//Artikel neu laden
-db.Produkte.updateMany(
-    { $or: [{ kategorie: "Elektronik" }, { name: "Kopfhörer" }] },
-    { $set: { preis: 100 } }
+db.programme.updateMany(
+    { Hersteller: "Microsoft" },
+    { $set: { Version: "1.80.0" } }
 );
-print("mehrere produkte aktualisiert mit updateMany().");
+print("Microsoft Programme aktualisiert.");
 
-//ersetzen
-db.Bestellungen.replaceOne(
-    { _id: bestellungIds[1] },
+
+db.pc_komponenten.replaceOne(
+    { _id: pcKomponenteId },
     {
-        _id: bestellungIds[1],
-        benutzerId: benutzerId,
-        produktId: produktIds[1],//new
-        menge: 1,  //Änderung
-        status: "Abgeschlossen"
+        _id: pcKomponenteId,
+        CPU: "Intel Core i7-12700H",
+        RAM: 16,
+        Datenträger: "1TB SSD",
+        Grafikkarte: "NVIDIA RTX 4080", //new gpu
+        Netzwerkkarte: "Intel AX201",
+        Mainboard: "Dell Custom Board",
+        Netzteil: "90W Adapter",
+        Gehäuse: "Aluminium",
+        Gekauft_am: ISODate("2023-05-12T00:00:00Z"),
+        Win_Version: ["Windows 10", "Windows 11"]
     }
 );
-print("Bestellung ersetzt mit replaceOne().");
+print("PC-Komponente ersetzt.");
+
+
+db.windows_betriebssystem.replaceOne(
+    { _id: computerName },
+    {
+        _id: computerName,
+        ComputerName: computerName,
+        Build_Version: "23H1", //new update
+        Art: "Pro",
+        Architektur: "64-bit",
+        Last_Update: new Date(),
+        Benutzer: [benutzerId]
+    }
+);
+print("Windows-Betriebssystem ersetzt.");

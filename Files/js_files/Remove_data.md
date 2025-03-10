@@ -1,31 +1,49 @@
 ````
 use KN03;
 
-db.users.drop();
-db.orders.drop();
-db.products.drop();
 
-print("Collections gelöscht.");
+
 
 
 const userIdToDelete = ObjectId("65e01f7f456d7a6b5c3a1d23");
-const userResult = db.users.deleteOne({ _id: userIdToDelete });
+const userResult = db.benutzer.deleteOne({ _id: userIdToDelete });
 
 if (userResult.deletedCount > 0) {
-    print("Benutzer gelöscht");
+    print("Benutzer wurde gelöscht.");
 } else {
-    print("Kein Benutzer mit der id");
+    print("Kein Benutzer mit dieser ID.");
 }
 
-const productId1 = ObjectId("65e01f8a456d7a6b5c3a1d24");
-const productId2 = ObjectId("65e01f8b456d7a6b5c3a1d25");
 
-const productResult = db.products.deleteMany({
-    _id: { $in: [productId1, productId2] }
+const programId1 = ObjectId("65e01f8a456d7a6b5c3a1d24");
+const programId2 = ObjectId("65e01f8b456d7a6b5c3a1d25");
+
+const programResult = db.programme.deleteMany({
+    _id: { $in: [programId1, programId2] }
 });
 
-if (productResult.deletedCount > 0) {
-    print(productResult.deletedCount + " Produkte gelöscht");
+if (programResult.deletedCount > 0) {
+    print(programResult.deletedCount + " gelöscht.");
 } else {
-    print("Id gibts nicht");
+    print("Programme nicht gefunden.");
+}
+
+
+const computerNameToDelete = "DELL-XPS-15";
+const osResult = db.windows_betriebssystem.deleteOne({ ComputerName: computerNameToDelete });
+
+if (osResult.deletedCount > 0) {
+    print("Betriebssystem gelöscht.");
+} else {
+    print("Kein Betriebssystem mit diesem Namen gefunden.");
+}
+
+
+const systemModelToDelete = "Dell-XPS-15";
+const pcResult = db.pc_komponenten.deleteOne({ _id: systemModelToDelete });
+
+if (pcResult.deletedCount > 0) {
+    print("PC komponente wurde gelöscht.");
+} else {
+    print("Keine PC komponente mit diesem Modell gefunden.");
 }
