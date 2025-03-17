@@ -1,10 +1,9 @@
 ````
+
+
 use KN03;
 
-
-
 let benutzerId = ObjectId();
-
 db.benutzer.insertOne({
     _id: benutzerId,
     BenutzerName: "Max",
@@ -16,8 +15,7 @@ db.benutzer.insertOne({
 print("Benutzer eingefügt.");
 
 
-let pcKomponenteId = "Dell XPS 15";
-
+let pcKomponenteId = ObjectId();
 db.pc_komponenten.insertOne({
     _id: pcKomponenteId,
     CPU: "Intel Core i7-12700H",
@@ -31,25 +29,27 @@ db.pc_komponenten.insertOne({
     Gekauft_am: ISODate("2023-05-12T00:00:00Z"),
     Win_Version: ["Windows 10", "Windows 11"]
 });
-print("PC-Komponenten eingefügt.");
 
 
-let computerName = "DELL-XPS-15";
-
+//benutzer
+let computerId = ObjectId();
 db.windows_betriebssystem.insertOne({
-    _id: computerName,
-    ComputerName: computerName,
+    _id: computerId,
+    ComputerName: "DELL-XPS-15",
     Build_Version: "22H2",
     Art: "Pro",
     Architektur: "64-bit",
     Last_Update: new Date(),
-    Benutzer: [benutzerId] // Verknüpfung mit Benutzer
+    Benutzer: [{
+       _id: benutzerId,
+       BenutzerName: "Max",
+       Rolle: "Admin",
+       Letzter_Login: new Date(),
+       email: "max@gmail.com"
+    }]
 });
-print("Windows Betriebssystem eingefügt.");
-
 
 let programIds = [ObjectId(), ObjectId()];
-
 db.programme.insertMany([
     {
         _id: programIds[0],
@@ -76,21 +76,23 @@ db.programme.insertMany([
 ]);
 print("Programme eingefügt.");
 
-//Updates
 
+
+//update
 db.benutzer.updateOne(
     { _id: benutzerId },
     { $set: { email: "max.new@gmail.com" } }
 );
-print("Benutzer aktualisiert.");
 
+
+//update
 db.programme.updateMany(
     { Hersteller: "Microsoft" },
     { $set: { Version: "1.80.0" } }
 );
-print("Microsoft Programme aktualisiert.");
 
 
+//update
 db.pc_komponenten.replaceOne(
     { _id: pcKomponenteId },
     {
@@ -98,7 +100,7 @@ db.pc_komponenten.replaceOne(
         CPU: "Intel Core i7-12700H",
         RAM: 16,
         Datenträger: "1TB SSD",
-        Grafikkarte: "NVIDIA RTX 4080", //new gpu
+        Grafikkarte: "NVIDIA RTX 4080", //neue GPU
         Netzwerkkarte: "Intel AX201",
         Mainboard: "Dell Custom Board",
         Netzteil: "90W Adapter",
@@ -107,19 +109,25 @@ db.pc_komponenten.replaceOne(
         Win_Version: ["Windows 10", "Windows 11"]
     }
 );
-print("PC-Komponente ersetzt.");
 
 
+//replace
 db.windows_betriebssystem.replaceOne(
-    { _id: computerName },
+    { _id: computerId },
     {
-        _id: computerName,
-        ComputerName: computerName,
-        Build_Version: "23H1", //new update
+        _id: computerId,
+        ComputerName: "DELL-XPS-15",
+        Build_Version: "23H1",
         Art: "Pro",
         Architektur: "64-bit",
         Last_Update: new Date(),
-        Benutzer: [benutzerId]
+        Benutzer: [{
+           _id: benutzerId,
+           BenutzerName: "Max",
+           Rolle: "Admin",
+           Letzter_Login: new Date(),
+           email: "maxnew@gmail.com"
+        }]
     }
 );
-print("Windows-Betriebssystem ersetzt.");
+
