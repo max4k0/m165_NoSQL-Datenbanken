@@ -6,49 +6,16 @@
 db = db.getSiblingDB("KN03");
 
 
-db.benutzer.drop();
 db.pc_komponenten.drop();
 db.windows_betriebssystem.drop();
 db.programme.drop();
 
 const userId1 = ObjectId();
-db.benutzer.insertOne({
-    _id: userId1,
-    BenutzerName: "Tom",
-    Passwort: "pass123",
-    Rolle: "Admin",
-    Letzter_Login: new Date()
-});
-
-
-//mehr datensätze hinzufügen
 const userId2 = ObjectId();
 const userId3 = ObjectId();
 const userId4 = ObjectId();
 
-db.benutzer.insertMany([
-    {
-        _id: userId2,
-        BenutzerName: "Anna",
-        Passwort: "pass456",
-        Rolle: "User",
-        Letzter_Login: new Date()
-    },
-    {
-        _id: userId3,
-        BenutzerName: "Felix",
-        Passwort: "pass789",
-        Rolle: "User",
-        Letzter_Login: new Date()
-    },
-    {
-        _id: userId4,
-        BenutzerName: "Laura",
-        Passwort: "pass101",
-        Rolle: "Guest",
-        Letzter_Login: new Date()
-    }
-]);
+
 
 const pcId1 = ObjectId();
 const pcId2 = ObjectId();
@@ -129,8 +96,13 @@ db.windows_betriebssystem.insertMany([
         Architektur: "64-bit",
         Last_Update: new Date(),
         Benutzer: [
-            { BenutzerName: "Tom", Rolle: "Admin", Letzter_Login: new Date() },
-            { BenutzerName: "Anna", Rolle: "User", Letzter_Login: new Date() }
+        {
+    _id: userId1,
+    BenutzerName: "Tom",
+    Passwort: "pass123",
+    Rolle: "Admin",
+    Letzter_Login: new Date()
+    }
         ]
     },
     {
@@ -141,8 +113,13 @@ db.windows_betriebssystem.insertMany([
         Architektur: "64-bit",
         Last_Update: new Date(),
         Benutzer: [
-            { BenutzerName: "Felix", Rolle: "User", Letzter_Login: new Date() },
-            { BenutzerName: "Laura", Rolle: "Guest", Letzter_Login: new Date() }
+    {
+        _id: userId2,
+        BenutzerName: "Anna",
+        Passwort: "pass456",
+        Rolle: "User",
+        Letzter_Login: new Date()
+    }
         ]
     },
     {
@@ -153,8 +130,13 @@ db.windows_betriebssystem.insertMany([
         Architektur: "64-bit",
         Last_Update: new Date(),
         Benutzer: [
-            { BenutzerName: "Anna", Rolle: "User", Letzter_Login: new Date() },
-            { BenutzerName: "Felix", Rolle: "User", Letzter_Login: new Date() }
+    {
+        _id: userId3,
+        BenutzerName: "Felix",
+        Passwort: "pass789",
+        Rolle: "User",
+        Letzter_Login: new Date()
+    },
         ]
     },
     {
@@ -165,8 +147,13 @@ db.windows_betriebssystem.insertMany([
         Architektur: "64-bit",
         Last_Update: new Date(),
         Benutzer: [
-            { BenutzerName: "Laura", Rolle: "Guest", Letzter_Login: new Date() },
-            { BenutzerName: "Tom", Rolle: "Admin", Letzter_Login: new Date() }
+    {
+        _id: userId4,
+        BenutzerName: "Laura",
+        Passwort: "pass101",
+        Rolle: "Guest",
+        Letzter_Login: new Date()
+    }
         ]
     }
 ]);
