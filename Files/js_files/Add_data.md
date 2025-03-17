@@ -174,10 +174,7 @@ db.programme.insertMany([
         Beschreibung: "Code Editor für Entwickler",
         Rechte: "Admin",
         Installiert_am: ISODate("2024-02-15T00:00:00Z"),
-        Benutzer: [
-            { BenutzerName: "Tom", Rolle: "Admin" },
-            { BenutzerName: "Felix", Rolle: "User" }
-        ]
+        Benutzer: [userId3, userId4]
     },
     {
         _id: progId2,
@@ -188,10 +185,7 @@ db.programme.insertMany([
         Beschreibung: "Webbrowser",
         Rechte: "User",
         Installiert_am: ISODate("2024-01-10T00:00:00Z"),
-        Benutzer: [
-            { BenutzerName: "Tom", Rolle: "Admin" },
-            { BenutzerName: "Laura", Rolle: "Guest" }
-        ]
+        Benutzer: [userId2, userId4]
     },
     {
         _id: progId3,
@@ -202,10 +196,7 @@ db.programme.insertMany([
         Beschreibung: "Bildbearbeitungssoftware",
         Rechte: "Pro User",
         Installiert_am: ISODate("2023-12-05T00:00:00Z"),
-        Benutzer: [
-            { BenutzerName: "Anna", Rolle: "User" },
-            { BenutzerName: "Felix", Rolle: "User" }
-        ]
+        Benutzer: [userId1, userId3]
     },
     {
         _id: progId4,
@@ -216,10 +207,7 @@ db.programme.insertMany([
         Beschreibung: "Team-Kommunikationsplattform",
         Rechte: "User",
         Installiert_am: ISODate("2024-03-01T00:00:00Z"),
-        Benutzer: [
-            { BenutzerName: "Laura", Rolle: "Guest" },
-            { BenutzerName: "Anna", Rolle: "User" }
-        ]
+        Benutzer: [userId1, userId2]
     }
 ]);
 
