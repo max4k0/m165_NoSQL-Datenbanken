@@ -1,0 +1,162 @@
+{
+  "style": {
+    "font-family": "sans-serif",
+    "background-color": "#ffffff",
+    "background-image": "",
+    "background-size": "100%",
+    "node-color": "#ffffff",
+    "border-width": 4,
+    "border-color": "#000000",
+    "radius": 50,
+    "node-padding": 5,
+    "node-margin": 2,
+    "outside-position": "auto",
+    "node-icon-image": "",
+    "node-background-image": "",
+    "icon-position": "inside",
+    "icon-size": 64,
+    "caption-position": "inside",
+    "caption-max-width": 200,
+    "caption-color": "#000000",
+    "caption-font-size": 50,
+    "caption-font-weight": "normal",
+    "label-position": "inside",
+    "label-display": "pill",
+    "label-color": "#000000",
+    "label-background-color": "#ffffff",
+    "label-border-color": "#000000",
+    "label-border-width": 4,
+    "label-font-size": 40,
+    "label-padding": 5,
+    "label-margin": 4,
+    "directionality": "directed",
+    "detail-position": "inline",
+    "detail-orientation": "parallel",
+    "arrow-width": 5,
+    "arrow-color": "#000000",
+    "margin-start": 5,
+    "margin-end": 5,
+    "margin-peer": 20,
+    "attachment-start": "normal",
+    "attachment-end": "normal",
+    "relationship-icon-image": "",
+    "type-color": "#000000",
+    "type-background-color": "#ffffff",
+    "type-border-color": "#000000",
+    "type-border-width": 0,
+    "type-font-size": 16,
+    "type-padding": 5,
+    "property-position": "outside",
+    "property-alignment": "colon",
+    "property-color": "#000000",
+    "property-font-size": 16,
+    "property-font-weight": "normal"
+  },
+  "nodes": [
+    {
+      "id": "n0",
+      "position": {
+        "x": -2.0872836677198534,
+        "y": -38.99999999999997
+      },
+      "caption": "PC-Komponenten",
+      "style": {},
+      "labels": [],
+      "properties": {
+        "System Model": "String",
+        "CPU": "String",
+        "RAM": "Number(int)",
+        "Datenträger": "String",
+        "Grafikkarte": "String",
+        "Netzwerkkarte": "String",
+        "Mainboard": "String",
+        "Netzteil": "String",
+        "Gehäuse": "String",
+        "Gekauft am": "Date",
+        "Win Version": "array<String>"
+      }
+    },
+    {
+      "id": "n1",
+      "position": {
+        "x": 136.30226700251896,
+        "y": 200.6977329974811
+      },
+      "caption": "Windows Betriebsystem",
+      "style": {},
+      "labels": [],
+      "properties": {
+        "ComputerName": "String",
+        "Build-Version": "String",
+        "Art": "String",
+        "Architektur": "String",
+        "Last Update": "Date",
+        "Benutzer": "array{}"
+      }
+    },
+    {
+      "id": "n2",
+      "position": {
+        "x": 376,
+        "y": -39
+      },
+      "caption": "Benutzer",
+      "style": {},
+      "labels": [],
+      "properties": {
+        "BenutzerName": "String",
+        "Passwort": "String",
+        "Rolle": "String",
+        "Letzter Login": "Date",
+        "": ""
+      }
+    },
+    {
+      "id": "n3",
+      "position": {
+        "x": 514.3895506702388,
+        "y": 200.6977329974811
+      },
+      "caption": "Programm",
+      "style": {},
+      "labels": [],
+      "properties": {
+        "Programm ID": "String",
+        "Name": "String",
+        "Hersteller": "String",
+        "Version": "String",
+        "Kompatiblität": "String",
+        "Beschreibung": "String",
+        "Rechte": "String",
+        "Installiert am": "Date",
+        "array<String>": ""
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "n0",
+      "type": "runs",
+      "style": {},
+      "properties": {},
+      "fromId": "n0",
+      "toId": "n1"
+    },
+    {
+      "id": "n1",
+      "type": "hasUser",
+      "style": {},
+      "properties": {},
+      "fromId": "n1",
+      "toId": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "hasInstalled",
+      "style": {},
+      "properties": {},
+      "fromId": "n2",
+      "toId": "n3"
+    }
+  ]
+}
