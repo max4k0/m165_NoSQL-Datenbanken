@@ -1,4 +1,4 @@
-#### Block1-KN01
+#### Block2-KN01
 
 #### A:
 
@@ -9,6 +9,7 @@ Neo4j runtergeladen
 #### B:
 
 ![Neo4j-LogischesModell-arrowsApp.png](Files/Neo4j-LogischesModell-arrowsApp.png)
+
 
 Ausgehend von der Hauptentität trainingSession habe ich die entsprechenden Kategorien definiert.
 Alle Knoten repräsentieren dabei Entitäten, die in MongoDB als Collections umgesetzt werden.
