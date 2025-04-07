@@ -2,19 +2,25 @@
 
 A:
 
-![Image](https://github.com/user-attachments/assets/88dd4b3b-6756-4b7a-a979-2b0024be5233)
+
+
+
+![img.png](Files/img.png)
+
+
+
+![img_1.png](Files/img_1.png)
+
+
+
+![img_2.png](Files/img_2.png)
+
+
+![img_3.png](Files/img_3.png)
+
+
 
 B:
-
-![img_1.png](img_1.png)
-
-![img.png](img.png)
-
-![img_2.png](img_2.png)
-
-![img_3.png](img_3.png)
-
-C:
 
 # Prometheus Kurzzusammenfassung
 
