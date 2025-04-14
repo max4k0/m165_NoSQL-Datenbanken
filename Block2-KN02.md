@@ -117,25 +117,25 @@ Bei Ohne Detach dürfen keine Beziehungen mehr da sein, sonnst kann ein fehler e
 
 Nach einer Systemaktualisierung soll der Wert des Feldes "Last Update" beim Windows‑Betriebssystem aktualisiert werden.
 ```cyther
-MATCH (wb:Windows_Betriebssystem {ComputerName: "Workstation01"})
-SET wb["Last Update"] = date('2023-10-01')
-RETURN wb;
+MATCH (wb:Windows_Betriebssystem {ComputerName: "Workstation01"})-[r:UPDATE_HISTORY]->(ue:UpdateEvent {eventId: "EV"})
+SET r.updatedAt = date('2023-10-01')
+RETURN r;
 ```
 ![img_8.png](img_8.png)
 
 Ein Upgrade der Hardware erfolgt: Der RAM-Wert der PC-Komponenten soll von 16 GB auf 32 GB angepasst werden.
 ```cyther
-MATCH (pc:PC_Komponenten { `System Model`: "Dell XPS 15" })
-SET pc.RAM = 32
-RETURN pc;
+MATCH (pc:PC_Komponenten { `System Model`: "Dell XPS 15" })-[r:UPGRADE_HISTORY]->(ue:UpgradeEvent {eventId: "HW_UPGRADE"})
+SET r.RAMValue = 32
+RETURN r;
 ```
 ![img_9.png](img_9.png)
 
 Nach einem Update von Office, muss die Programm-Version von "2021" auf "2022" geändert werden.
 ```cyther
-MATCH (p:Programm { `Programm ID`: "P123" })
-SET p.Version = "2022"
-RETURN p;
+MATCH (p:Programm { `Programm ID`: "P123" })-[r:UPDATE_HISTORY]->(ue:UpdateEvent { eventId: "OFFICE_UPDATE" })
+SET r.Version = "2022"
+RETURN r;
 ```
 ![img_10.png](img_10.png)
 
